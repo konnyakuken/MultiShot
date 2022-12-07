@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShotScript : MonoBehaviour
+public class BulletMoveScript : MonoBehaviour
 {
     private Rigidbody2D rb;
-    private float speed = 10.0f;
+    private float speed = 15.0f;
     Vector3 dir;
 
     void Start()

@@ -8,8 +8,6 @@ public class PlayerController : MonoBehaviour
     private float speed = 5.0f;
     private Vector2 inputAxis;
 
-    [SerializeField] GameObject Bullet;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -27,10 +25,6 @@ public class PlayerController : MonoBehaviour
         var rotation = Quaternion.LookRotation(Vector3.forward, Input.mousePosition - pos);
         transform.localRotation = rotation;
 
-        if (Input.GetMouseButtonDown(0))
-        {
-            GameObject shot = Instantiate(Bullet, transform.position, transform.rotation); 
-        }
 
     }
 
