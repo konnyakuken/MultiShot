@@ -5,9 +5,10 @@ using UnityEngine.UI;
 
 public class ShotController : MonoBehaviour
 {
-    [SerializeField] private float ShotGauge = 0f;
+    [SerializeField] public float ShotGauge = 0f;
     [SerializeField] GameObject Bullet;
-    [SerializeField] Slider slider;
+    [SerializeField] public Slider slider;
+    public int MaxGauge = 3;
 
     void Start()
     {
@@ -17,7 +18,7 @@ public class ShotController : MonoBehaviour
     
     void Update()
     {
-        if(ShotGauge < 3)
+        if(ShotGauge < MaxGauge)
         {
             ShotGauge += 0.3f * Time.deltaTime;
             slider.value = ShotGauge;
