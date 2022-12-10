@@ -73,4 +73,5 @@ crashlytics-build.properties
 
 .vsconfig
 
+#fontは重いので除外
 Assets/font/NotoSansJP-Medium SDF.asset

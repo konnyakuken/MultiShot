@@ -58,16 +58,16 @@ public class StatusController : MonoBehaviour
             Destroy(collision.gameObject);
             if (isHit == false)
             {
-                Damage();
+                slider.value -= 1;
+                LifeReflect();
                 isHit = true;
             }
             DOVirtual.DelayedCall(0.3f, () => isHit = false) ;
         }
     }
 
-    private void Damage()
+    private void LifeReflect()
     {
-        slider.value -= 1;
 
         if (slider.value == 2)
         {
@@ -83,6 +83,10 @@ public class StatusController : MonoBehaviour
             slider.value = 3;
             SliderImage.color = new Color(142.0f / 255, 231.0f / 255, 134.0f / 255, 1);
         }
+        else
+        {
+            SliderImage.color = new Color(142.0f / 255, 231.0f / 255, 134.0f / 255, 1);
+        }
     }
 
     public void ItemResult(int result)
@@ -93,6 +97,7 @@ public class StatusController : MonoBehaviour
         {
             case (int)Item_TYPE.Life:
                 slider.value = 3;
+                LifeReflect();
                 EventText.text = "体力が全回復した！";
                 DOVirtual.DelayedCall(3f, () => EventText.text = "");
                 break;
@@ -100,6 +105,7 @@ public class StatusController : MonoBehaviour
                 slider.value += 1;
                 shotController.ShotGauge = shotController.MaxGauge;
                 shotController.slider.value = shotController.ShotGauge;
+                LifeReflect();
                 EventText.text = "体力と銃弾ゲージが回復した！";
                 DOVirtual.DelayedCall(3f, () => EventText.text = "");
                 break;
