@@ -5,6 +5,9 @@ using Unity.MLAgents;
 using Unity.MLAgents.Sensors;
 using Unity.MLAgents.Actuators;
 
+using DG.Tweening;
+
+
 public class AgentController : Agent
 {
     public Rigidbody2D rBody;
@@ -12,11 +15,17 @@ public class AgentController : Agent
     private float rotateSpeed = 10.0f;
     Vector3 dir;
 
+    ShotController shotController;
+    bool isShot = false;
+
 
     void Start()
     {
         rBody = this.gameObject.GetComponent<Rigidbody2D>();
+        GameObject child = transform.GetChild(1).gameObject;
+        shotController = child.GetComponent<ShotController>();
     }
+
 
     public Transform Target;
 
@@ -58,7 +67,12 @@ public class AgentController : Agent
         dir = new Vector3(Mathf.Cos(angleDir), Mathf.Sin(angleDir), 0.0f);
         rBody.velocity = dir.normalized * moveSpeed * controlSignal.y;
 
-
+        if (actionBuffers.ContinuousActions[2] == 1 && isShot == false)
+        {
+            isShot = true;
+            DOVirtual.DelayedCall(0.3f, () => isShot = false);
+            shotController.BulletShot();
+        }
 
         // Rewards
         float distanceToTarget = 0;//Vector3.Distance(this.transform.localPosition, Target.localPosition);
@@ -83,5 +97,15 @@ public class AgentController : Agent
         var continuousActionsOut = actionsOut.ContinuousActions;
         continuousActionsOut[0] = Input.GetAxis("Horizontal");
         continuousActionsOut[1] = Input.GetAxis("Vertical");
+
+        if (Input.GetMouseButton(0) && shotController.ShotGauge > 1)
+        {
+            continuousActionsOut[2] = 1;
+            
+        }
+        else
+        {
+            continuousActionsOut[2] = 0;
+        }
     }
 }

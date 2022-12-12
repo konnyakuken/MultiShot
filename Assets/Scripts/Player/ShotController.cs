@@ -26,8 +26,13 @@ public class ShotController : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0) && ShotGauge >1)
         {
-            ShotGauge -= 1;
-            Instantiate(Bullet, transform.position, transform.rotation);
+           // BulletShot();
         }
+    }
+
+    public void BulletShot()
+    {
+        ShotGauge -= 1;
+        Instantiate(Bullet, transform.position, transform.rotation);
     }
 }
