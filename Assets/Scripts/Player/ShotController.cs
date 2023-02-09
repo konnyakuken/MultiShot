@@ -26,7 +26,7 @@ public class ShotController : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0) && ShotGauge >1)
         {
-           // BulletShot();
+            BulletShot();
         }
     }
 
