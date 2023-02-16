@@ -20,7 +20,7 @@ public class PlayerController : MonoBehaviour
         inputAxis.x = Input.GetAxis("Horizontal");
         inputAxis.y = Input.GetAxis("Vertical");
         rb.velocity = inputAxis.normalized * speed;
-        Debug.Log(inputAxis.normalized);
+        //Debug.Log(inputAxis.normalized);
 
         var pos = Camera.main.WorldToScreenPoint(transform.localPosition);
         var rotation = Quaternion.LookRotation(Vector3.forward, Input.mousePosition - pos);
